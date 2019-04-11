@@ -20,6 +20,16 @@
 // const game = new Game();
 // game.getRandomPhrase().addPhraseToDisplay();
 
+// const game = new Game();
+// game.startGame();
+// console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
+
+//end of temp code
 const game = new Game();
+document.getElementById('btn__reset').addEventListener('click',function(){
 game.startGame();
-console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
+});
+
+
+
+
