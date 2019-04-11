@@ -26,17 +26,7 @@ for (let i=0; i < chosenPhrase.length; i++){
         const letter = chosenPhrase[i];
         listItem.append(letter);
     }
-    
-    
-    
-   
-    
-    
 }
-
-
-
-
 
 };
 }
