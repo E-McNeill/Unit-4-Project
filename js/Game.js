@@ -71,7 +71,7 @@ for (let i=0; i < removeHeart.length; i++ ){
          break }        
 }
     if (game.missed == 5 ){
-    alert('dead');
+    game.gameOver();
     }    
 };
 
@@ -82,12 +82,12 @@ for (let i=0; i < removeHeart.length; i++ ){
 gameOver(gameWon) {
 const showOverlay = document.getElementById('overlay');
 showOverlay.style.display = 'block';
-if (this.missed = 5){
-    document.getElementById('#overlay').setAttribute('class', 'lose');
-    document.getElementById('#game-over-message').textContent('You Lose :(');
+if (game.missed == 5){
+    const youLose = document.getElementById('overlay').setAttribute('class', 'lose');
+    document.getElementById('game-over-message').textContent ='Womp Womp......You Lose :(';
 } else {
-    document.getElementById('#overlay').setAttribute('class', 'win');
-    document.getElementById('#game-over-message').textContent('You Won!');
+    document.getElementById('overlay').setAttribute('class', 'win');
+    document.getElementById('game-over-message').textContent ='YAY, You\'ve Won!' ;
 }
 };
 }
