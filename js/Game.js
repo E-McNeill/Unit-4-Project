@@ -35,12 +35,52 @@ getRandomPhrase() {
 startGame() {
 const hideOverlay = document.getElementById('overlay');
 hideOverlay.style.display = 'none';    
-//game.getRandomPhrase().addPhraseToDisplay();
 const showPhrase = game.getRandomPhrase();
 this.activePhrase = showPhrase;
 showPhrase.addPhraseToDisplay();
 
+};
+handleInteraction(){
 
 };
+  /**
+* Checks for winning move
+* @return {boolean} True if game has been won, false if game wasn't
+won
+*/
+checkForWin(){
+const scan = document.querySelectorAll('#phrase >ul > li');
+if (scan.classList.contains('hide')){
+    return false;
+} else {
+    return true;
 }
- 
+};
+/**
+* Increases the value of the missed property
+* Removes a life from the scoreboard
+* Checks if player has remaining lives and ends game if player is out
+*/
+removeLife() {
+document.querySelector('tries').setAttribute('src', 'images/lostHeart.png');
+this.missed += 1;
+if (this.missed = 5){
+    game.gameOver();
+}    
+};
+/**
+* Displays game over message
+* @param {boolean} gameWon - Whether or not the user won the game
+*/
+gameOver(gameWon) {
+const showOverlay = document.getElementById('overlay');
+showOverlay.style.display = 'block';
+if (this.missed = 5){
+    document.getElementById('#overlay').setAttribute('class', 'lose');
+    document.getElementById('#game-over-message').textContent('You Lose :(');
+} else {
+    document.getElementById('#overlay').setAttribute('class', 'win');
+    document.getElementById('#game-over-message').textContent('You Won!');
+}
+};
+}
