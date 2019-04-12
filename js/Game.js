@@ -49,9 +49,8 @@ handleInteraction(){
 won
 */
 checkForWin(){
-//const scan = document.querySelectorAll('#phrase >ul > li');
-const scanTest = document.getElementById('phrase').querySelectorAll('.hide');
-if (scanTest.length > 0){
+const checkWin = document.getElementById('phrase').querySelectorAll('.hide');
+if (checkWin.length > 0){
     return false;
     } else {
         return true;
@@ -63,12 +62,19 @@ if (scanTest.length > 0){
 * Checks if player has remaining lives and ends game if player is out
 */
 removeLife() {
-document.querySelector('tries').setAttribute('src', 'images/lostHeart.png');
-this.missed += 1;
-if (this.missed = 5){
-    game.gameOver();
-}    
+const removeHeart = document.querySelectorAll('.tries img');
+game.missed += 1;
+for (let i=0; i < removeHeart.length; i++ ){
+    if (removeHeart[i].classList.contains('dead') == false){
+        removeHeart[i].classList.add('dead');
+        removeHeart[i].setAttribute('src', 'images/lostHeart.png');
+         break }        
+}
+    if (game.missed == 5 ){
+    alert('dead');
+    }    
 };
+
 /**
 * Displays game over message
 * @param {boolean} gameWon - Whether or not the user won the game
