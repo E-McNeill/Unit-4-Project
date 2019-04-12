@@ -49,12 +49,13 @@ handleInteraction(){
 won
 */
 checkForWin(){
-const scan = document.querySelectorAll('#phrase >ul > li');
-if (scan.classList.contains('hide')){
+//const scan = document.querySelectorAll('#phrase >ul > li');
+const scanTest = document.getElementById('phrase').querySelectorAll('.hide');
+if (scanTest.length > 0){
     return false;
-} else {
-    return true;
-}
+    } else {
+        return true;
+    }
 };
 /**
 * Increases the value of the missed property
