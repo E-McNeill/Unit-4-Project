@@ -39,9 +39,12 @@ const showPhrase = game.getRandomPhrase();
 this.activePhrase = showPhrase;
 showPhrase.addPhraseToDisplay();
 
-};
-handleInteraction(){
 
+};
+handleInteraction(button){
+button.disabled = true;
+this.activePhrase.checkLetter(button.textContent);
+    
 };
   /**
 * Checks for winning move
@@ -50,11 +53,9 @@ won
 */
 checkForWin(){
 const checkWin = document.getElementById('phrase').querySelectorAll('.hide');
-if (checkWin.length > 0){
-    return false;
-    } else {
-        return true;
-    }
+if (checkWin.length < 1){
+    game.gameOver();
+     } 
 };
 /**
 * Increases the value of the missed property
@@ -85,9 +86,28 @@ showOverlay.style.display = 'block';
 if (game.missed == 5){
     const youLose = document.getElementById('overlay').setAttribute('class', 'lose');
     document.getElementById('game-over-message').textContent ='Womp Womp......You Lose :(';
+    let removeLi = document.querySelector('#phrase ul');
+    while (removeLi.hasChildNodes()){
+        removeLi.removeChild(removeLi.firstChild);
+            }
+const updateKeys = document.getElementsByClassName('key');
+for (let i=0; i < updateKeys.length; i++){
+    updateKeys[i].classList.remove('chosen');
+    updateKeys[i].classList.remove('wrong'); 
+    };
+    
 } else {
     document.getElementById('overlay').setAttribute('class', 'win');
     document.getElementById('game-over-message').textContent ='YAY, You\'ve Won!' ;
+    let removeLi = document.querySelector('#phrase ul');
+    while (removeLi.hasChildNodes()){
+        removeLi.removeChild(removeLi.firstChild);
+    }
+    const updateKeys = document.getElementsByClassName('key');
+for (let i=0; i < updateKeys.length; i++){
+    updateKeys[i].classList.remove('chosen');
+    updateKeys[i].classList.remove('wrong'); 
+    };
 }
 };
 }

@@ -30,6 +30,13 @@ document.getElementById('btn__reset').addEventListener('click',function(){
 game.startGame();
 });
 
+const button = document.querySelectorAll('.key');
+for (let i=0; i < button.length; i++ ){
+    button[i].addEventListener('click', function(){
+        game.handleInteraction(button[i]);
+    })
+};
+
 
 
 
