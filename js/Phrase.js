@@ -34,25 +34,11 @@ for (let i=0; i < chosenPhrase.length; i++){
 */
 checkLetter(letter){
 if (this.phrase.includes(letter)){
-    this.showMatchedLetter(letter);
-    const addChosen = document.querySelectorAll('.key');
-    for (let i=0; i < addChosen.length; i++){
-        if (addChosen[i].textContent == letter){
-            addChosen[i].classList.add('chosen');
-            }
-            game.checkForWin();
-        }
-    //return true;
-    } else {
-       const addWrong = document.querySelectorAll('.key');
-    for (let i=0; i < addWrong.length; i++){
-        if (addWrong[i].textContent == letter){
-            addWrong[i].classList.add('wrong');
-            game.removeLife();
-        }
-    }
-        //return false;
+    return true;
+} else {
+    return false;
 }
+
 };
 /**
 * Displays passed letter on screen after a match is found

@@ -35,17 +35,32 @@ getRandomPhrase() {
 startGame() {
 const hideOverlay = document.getElementById('overlay');
 hideOverlay.style.display = 'none';    
+hideOverlay.classList.remove('lose');
+hideOverlay.classList.remove('win');
+document.getElementById('game-over-message').textContent ='';
 const showPhrase = game.getRandomPhrase();
 this.activePhrase = showPhrase;
 showPhrase.addPhraseToDisplay();
+this.missed = 0;
 
 
 };
 handleInteraction(button){
 button.disabled = true;
 this.activePhrase.checkLetter(button.textContent);
-    
-};
+if (this.activePhrase.checkLetter(button.textContent) == true){
+    this.activePhrase.showMatchedLetter(button.textContent);
+    game.checkForWin();
+    button.classList.add('chosen');
+    if (game.checkForWin() == true){
+        game.gameOver();
+    }
+} else if (this.activePhrase.checkLetter(button.textContent) == false){
+    button.classList.add('wrong');
+    game.removeLife();
+}
+
+  };
   /**
 * Checks for winning move
 * @return {boolean} True if game has been won, false if game wasn't
@@ -54,7 +69,7 @@ won
 checkForWin(){
 const checkWin = document.getElementById('phrase').querySelectorAll('.hide');
 if (checkWin.length < 1){
-    game.gameOver();
+    return true;
      } 
 };
 /**
@@ -83,31 +98,42 @@ for (let i=0; i < removeHeart.length; i++ ){
 gameOver(gameWon) {
 const showOverlay = document.getElementById('overlay');
 showOverlay.style.display = 'block';
-if (game.missed == 5){
-    const youLose = document.getElementById('overlay').setAttribute('class', 'lose');
-    document.getElementById('game-over-message').textContent ='Womp Womp......You Lose :(';
-    let removeLi = document.querySelector('#phrase ul');
+document.addEventListener('keydown',  function (e){
+    if (e.key == 'Enter'){
+       game.startGame();
+       }                
+});
+const removeHeart = document.querySelectorAll('.tries img');
+for (let i=0; i < removeHeart.length; i++ ){
+    if (removeHeart[i].classList.contains('dead')){
+        removeHeart[i].classList.remove('dead');
+        removeHeart[i].setAttribute('src', 'images/liveHeart.png');
+        }        
+}
+const removeLi = document.querySelector('#phrase ul');
     while (removeLi.hasChildNodes()){
         removeLi.removeChild(removeLi.firstChild);
-            }
+        }
 const updateKeys = document.getElementsByClassName('key');
-for (let i=0; i < updateKeys.length; i++){
-    updateKeys[i].classList.remove('chosen');
-    updateKeys[i].classList.remove('wrong'); 
-    };
-    
-} else {
-    document.getElementById('overlay').setAttribute('class', 'win');
-    document.getElementById('game-over-message').textContent ='YAY, You\'ve Won!' ;
-    let removeLi = document.querySelector('#phrase ul');
-    while (removeLi.hasChildNodes()){
-        removeLi.removeChild(removeLi.firstChild);
+    for (let i=0; i < updateKeys.length; i++){
+        updateKeys[i].classList.remove('chosen');
+        updateKeys[i].classList.remove('wrong'); 
     }
-    const updateKeys = document.getElementsByClassName('key');
-for (let i=0; i < updateKeys.length; i++){
-    updateKeys[i].classList.remove('chosen');
-    updateKeys[i].classList.remove('wrong'); 
-    };
+   
+const enableButtons = document.querySelectorAll('.key');
+    for (let i=0; i < enableButtons.length; i++ ){
+        enableButtons[i].disabled = false; 
+    }
+    if (game.missed == 5){
+    document.getElementById('overlay').setAttribute('class', 'lose');
+    document.getElementById('game-over-message').textContent ='Womp Womp......You Lose :(';
+        
+    } else {
+        document.getElementById('overlay').setAttribute('class', 'win');
+        document.getElementById('game-over-message').textContent ='YAY, You\'ve Won!' ;  
+        };
 }
+
 };
-}
+
+

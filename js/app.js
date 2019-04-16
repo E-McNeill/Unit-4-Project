@@ -34,8 +34,24 @@ const button = document.querySelectorAll('.key');
 for (let i=0; i < button.length; i++ ){
     button[i].addEventListener('click', function(){
         game.handleInteraction(button[i]);
-    })
+        
+     })
 };
+
+document.addEventListener('keydown',  function (e){
+    for (let i=0; i< button.length; i++){
+        if (e.key == button[i].textContent){
+            game.handleInteraction(button[i]);
+        }
+    }                
+    });
+
+
+
+
+
+
+
 
 
 
