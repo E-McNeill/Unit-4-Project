@@ -2,49 +2,33 @@
  * Project 4 - OOP Game App
  * app.js */
 
- //Temp Code
-// const game = new Game();
-// game.phrases.forEach((phrase, index) => {
-// console.log(`Phrase ${index} - phrase: ${phrase.phrase}`);
-// });
 
-// const logPhrase = (phrase) => {
-//     console.log(`Phrase - phrase: `, phrase.phrase);
-//     };
-//     const game = new Game();
-//     logPhrase(game.getRandomPhrase());
-//     logPhrase(game.getRandomPhrase());
-//     logPhrase(game.getRandomPhrase());
-//     logPhrase(game.getRandomPhrase());
-//     logPhrase(game.getRandomPhrase());
-// const game = new Game();
-// game.getRandomPhrase().addPhraseToDisplay();
-
-// const game = new Game();
-// game.startGame();
-// console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
-
-//end of temp code
+ /*Begins a new game when the start button is clicked*/
 const game = new Game();
 document.getElementById('btn__reset').addEventListener('click',function(){
 game.startGame();
 });
 
+/*Event listener for each on screen key. Selected key passed to interaction handler*/
 const button = document.querySelectorAll('.key');
 for (let i=0; i < button.length; i++ ){
     button[i].addEventListener('click', function(){
         game.handleInteraction(button[i]);
-        
-     })
+         })
 };
 
+/*Event listener for physcical keyboard keys. Selected key passed to interaction handler*/
 document.addEventListener('keydown',  function (e){
-    for (let i=0; i< button.length; i++){
-        if (e.key == button[i].textContent){
+for (let i=0; i< button.length; i++){
+    if (e.key == button[i].textContent){
+        if (button[i].disabled == false) {
             game.handleInteraction(button[i]);
+            }
         }
-    }                
-    });
+    }          
+});
+
+  
 
 
 

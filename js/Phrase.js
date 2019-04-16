@@ -6,9 +6,8 @@ class Phrase{
     constructor(phrase){
         this.phrase = phrase.toLowerCase();
     }
-/**
-* Display phrase on game board
-*/
+
+/*Display phrase on the game board*/
 addPhraseToDisplay() {
 let chosenPhrase = this.phrase;
 const eachPhrase = document.querySelector('#phrase > ul');
@@ -28,22 +27,17 @@ for (let i=0; i < chosenPhrase.length; i++){
     }
 }
 };
-/**
-* Checks if passed letter is in phrase
-* @param (string) letter - Letter to check
-*/
+
+/*Checks if the selected key is found in the chosen phrase*/
 checkLetter(letter){
 if (this.phrase.includes(letter)){
     return true;
 } else {
     return false;
 }
-
 };
-/**
-* Displays passed letter on screen after a match is found
-* @param (string) letter - Letter to display
-*/
+
+/*Shows the letter onscreen if it is a match*/
 showMatchedLetter(letter) {
     const av = document.querySelectorAll('#phrase >ul > li');
   for (let i=0; i < av.length; i++){
@@ -52,6 +46,6 @@ showMatchedLetter(letter) {
         av[i].classList.add('show');
       }
   }
-  
-};
+ };
+
 }
